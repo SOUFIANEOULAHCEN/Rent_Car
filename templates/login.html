@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        /* Styles CSS personnalisés */
+        :root {
+            --primary-color: #e50914; /* Couleur Netflix */
+            --primary-color-dark: #b20710; /* Couleur Netflix légèrement plus foncée */
+            --background-color: #141414; /* Fond noir de Netflix */
+            --text-color: #ffffff; /* Couleur de texte blanche */
+            --input-background: #333333; /* Fond des champs de saisie */
+            --input-border: #444444; /* Bordure des champs de saisie */
+            --box-shadow: rgba(0, 0, 0, 0.75);
+            --font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--background-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            max-width: 350px;
+            width: 100%;
+            padding: 40px;
+            background-color: var(--background-color);
+            border-radius: 8px;
+            box-shadow: 0 4px 15px var(--box-shadow);
+            text-align: center;
+        }
+
+        h2 {
+            margin: 0 0 20px;
+            color: var(--text-color);
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        button {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid var(--input-border);
+            border-radius: 5px;
+            background-color: var(--input-background);
+            color: var(--text-color);
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-weight: 700;
+        }
+
+        button:hover {
+            background-color: var(--primary-color-dark);
+        }
+
+        a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form action="{{ url_for('login') }}" method="POST">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <a href="/">Back to Home Page</a>
+    </div>
+</body>
+</html>

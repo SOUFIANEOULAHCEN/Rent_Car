@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Modifier Manager</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+      :root {
+        --black: #181818;
+        --white: #e5e5e5;
+        --primary-color: #e50914;
+        --secondary-color: #b3b3b3;
+        --font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        font-family: var(--font-family);
+        background-color: var(--black);
+        color: var(--white);
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+      }
+
+      h2 {
+        font-size: 32px;
+        margin: 20px 0;
+        color: var(--primary-color);
+      }
+
+      form {
+        width: 100%;
+        max-width: 400px; /* Minimise the form width */
+        background-color: #333;
+        padding: 20px; /* Adjusted padding for a smaller form */
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        margin: 20px auto;
+      }
+
+      form label {
+        display: block;
+        font-size: 16px;
+        margin-bottom: 10px;
+        color: var(--secondary-color);
+      }
+
+      form input {
+        width: 95%;
+        padding: 10px; /* Adjusted padding for a smaller form */
+        margin-bottom: 15px; /* Adjusted margin for a smaller form */
+        border: 1px solid #444;
+        border-radius: 5px;
+        background-color: #222;
+        color: var(--white);
+        font-size: 16px;
+      }
+
+      form input:focus {
+        border-color: var(--primary-color);
+        outline: none;
+      }
+
+      form button {
+        background-color: var(--primary-color);
+        color: #fff;
+        padding: 10px; /* Adjusted padding for a smaller form */
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 18px;
+        width: 100%;
+        margin-bottom: 15px; /* Adjusted margin for a smaller form */
+        transition: background-color 0.3s ease;
+      }
+
+      form button:hover {
+        background-color: #b20710;
+      }
+
+      form a {
+        display: block;
+        text-align: center;
+        color: var(--primary-color);
+        margin-top: 15px;
+        text-decoration: none;
+        font-size: 16px;
+      }
+
+      form a:hover {
+        text-decoration: underline;
+      }
+
+      #Retour {
+        display: block;
+        background-color: var(--primary-color);
+        color: #fff;
+        padding: 10px; /* Adjusted padding for a smaller form */
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+        font-weight: bold;
+        font-size: 18px;
+        margin-top: 15px; /* Adjusted margin for a smaller form */
+        transition: background-color 0.3s ease;
+      }
+
+      #Retour:hover {
+        background-color: #b20710;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h2>Modify manager</h2>
+    <form
+      action="{{ url_for('edit_manager', manager_id=manager_id) }}"
+      method="POST"
+    >
+      <label for="Lname">Last Name:</label>
+      <input
+        type="text"
+        id="Lname"
+        name="Lname"
+        value="{{ manager[0] }}"
+        required
+      />
+
+      <label for="Fname">First Name:</label>
+      <input
+        type="text"
+        id="Fname"
+        name="Fname"
+        value="{{ manager[1] }}"
+        required
+      />
+
+      <label for="email">Email:</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        value="{{ manager[2] }}"
+        required
+      />
+
+      <label for="motdepasse">Password:</label>
+      <input
+        type="password"
+        id="motdepasse"
+        name="motdepasse"
+        value="{{ manager[3] }}"
+        required
+      />
+
+      <button type="submit">Save</button>
+      <a id="Retour" href="{{ url_for('Dashboard_Admin') }}"
+        >Back to Dashboard Admin Page</a
+      >
+    </form>
+  </body>
+</html>

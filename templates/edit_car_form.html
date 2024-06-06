@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifier la voiture</title>
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+    />
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+        :root {
+            --primary-color: #e50914; /* Rouge Netflix */
+            --secondary-color: #141414; /* Noir */
+            --accent-color: #ff0000; /* Rouge */
+            --text-color: #ffffff; /* Blanc */
+            --border-color: #333333; /* Gris foncé */
+            --button-hover-color: #b20710; /* Rouge plus foncé */
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: var(--secondary-color);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+
+        input,
+        select,
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+        }
+
+        select {
+            appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 12l-6-6 1.5-1.5L10 9l4.5-4.5L16 6z" fill="currentColor"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 30px;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: var(--button-hover-color);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Edit Car</h2>
+        <form action="{{ url_for('edit_car_form', car_id=voiture[0]) }}" method="POST" enctype="multipart/form-data">
+            <!-- Champs pré-remplis avec les données de la voiture -->
+            <label for="marque">Marque:</label>
+            <input type="text" id="marque" name="marque" value="{{ voiture[1] }}" required>
+
+            <label for="modele">Model:</label>
+            <input type="text" id="modele" name="modele" value="{{ voiture[2] }}" required>
+
+            <label for="immatriculation">Immatriculation:</label>
+            <input type="text" id="immatriculation" name="immatriculation" value="{{ voiture[3] }}" required>
+
+            <label for="categorie">Category:</label>
+            <input type="text" id="categorie" name="categorie" value="{{ voiture[4] }}" required>
+
+            <label for="prix">Price:</label>
+            <input type="number" id="prix" name="prix" value="{{ voiture[5] }}" required>
+
+            <label for="disponibilite">Availability:</label>
+            <select id="disponibilite" name="disponibilite" required>
+                <option value="1" {% if voiture[6] == '1' %}selected{% endif %}>Disponible</option>
+                <option value="0" {% if voiture[6] == '0' %}selected{% endif %}>Non disponible</option>
+            </select>
+
+            <label for="photo">Picture:</label>
+            <input type="file" id="photo" name="photo">
+
+            <!-- Champ caché pour conserver l'ancienne photo -->
+            <input type="hidden" name="current_photo" value="{{ voiture[7] }}">
+
+            <button type="submit">Modify</button>
+            
+        </form>
+    </div>
+</body>
+
+</html>

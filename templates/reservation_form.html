@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Réservation de voiture</title>
+    <!-- Importation des polices Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <style>
+        :root {
+            --black: #141414;
+            --white: #ffffff;
+            --gray: #333333;
+            --red: #e50914;
+            --dark-gray: #222222;
+            --font-family: 'Poppins', sans-serif;
+            --transition-speed: 0.3s;
+        }
+
+        body {
+            font-family: var(--font-family);
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            overflow-x: hidden;
+            background-color: var(--black);
+            color: var(--white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        .title-container {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            margin: 0;
+            color: var(--red);
+            font-size: 24px;
+        }
+
+        form {
+            width: 100%;
+            max-width: 350px;
+            padding: 20px;
+            background-color: var(--dark-gray);
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+        }
+
+        form:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.8);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--white);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: var(--gray);
+            color: var(--white);
+            font-size: 14px;
+            transition: background-color var(--transition-speed);
+        }
+
+        input:focus, select:focus {
+            background-color: #444;
+            outline: none;
+        }
+
+        input[type="submit"], #Retour {
+            background-color: var(--red);
+            color: var(--white);
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            text-align: center;
+            margin-top: 10px;
+            transition: background-color var(--transition-speed);
+        }
+
+        input[type="submit"]:hover, #Retour:hover {
+            background-color: #b20710;
+        }
+
+        #Retour {
+            display: block;
+            text-decoration: none;
+        }
+
+        .flash-messages {
+            background-color: var(--red);
+            padding: 10px;
+            border-radius: 4px;
+            color: var(--white);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="title-container">
+        <h2>Rent now !</h2>
+    </div>
+    <!-- Display flash messages -->
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    
+    <form action="/reserve" method="POST" enctype="application/x-www-form-urlencoded">
+
+        <!-- Informations du client -->
+        <label for="nom">First name:</label>
+        <input type="text" name="nom" id="nom" required>
+
+        <label for="prenom">Last name:</label>
+        <input type="text" name="prenom" id="prenom" required>
+
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" required>
+
+        <label for="telephone">Phone number:</label>
+        <input type="tel" name="telephone" id="telephone" required>
+
+        <!-- Sélection de la voiture -->
+        <label for="voiture_id">Rent a car:</label>
+        <select name="voiture_id" id="voiture_id" required>
+            {% for voiture in voitures %}
+                <option value="{{ voiture['id'] }}">{{ voiture['marque'] }} - {{ voiture['modele'] }}</option>
+            {% endfor %}
+        </select>
+
+        <!-- Dates de réservation -->
+        <label for="date_debut">Start date:</label>
+        <input type="date" name="date_debut" id="date_debut" required>
+
+        <label for="date_fin">End date::</label>
+        <input type="date" name="date_fin" id="date_fin" required>
+
+        <!-- Soumettre le formulaire -->
+        <input type="submit" value="Réserver">
+        <a id="Retour" href="{{ url_for('index') }}">Back to Home !</a>
+        
+    </form>
+</body>
+
+</html>

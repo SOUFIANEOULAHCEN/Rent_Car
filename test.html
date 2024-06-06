@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifier la voiture</title>
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+    />
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --background-color: #f8f9fa;
+            --white: #fff;
+            --black: #000;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        input,
+        select,
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: var(--white);
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: darkblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Edit Car</h2>
+        <form action="{{ url_for('edit_car_form', car_id=voiture[0]) }}" method="POST" enctype="multipart/form-data">
+            <!-- Champs pré-remplis avec les données de la voiture -->
+            <label for="marque">Marque:</label>
+            <input type="text" id="marque" name="marque" value="{{ voiture[1] }}" required>
+
+            <label for="modele">Model:</label>
+            <input type="text" id="modele" name="modele" value="{{ voiture[2] }}" required>
+
+            <label for="immatriculation">Immatriculation:</label>
+            <input type="text" id="immatriculation" name="immatriculation" value="{{ voiture[3] }}" required>
+
+            <label for="categorie">Category:</label>
+            <input type="text" id="categorie" name="categorie" value="{{ voiture[4] }}" required>
+
+            <label for="prix">Price:</label>
+            <input type="number" id="prix" name="prix" value="{{ voiture[5] }}" required>
+
+            <label for="disponibilite">Availability:</label>
+            <select id="disponibilite" name="disponibilite" required>
+                <option value="1" {% if voiture[6] == '1' %}selected{% endif %}>Disponible</option>
+                <option value="0" {% if voiture[6] == '0' %}selected{% endif %}>Non disponible</option>
+            </select>
+
+            <label for="photo">Picture:</label>
+            <input type="file" id="photo" name="photo">
+
+            <!-- Champ caché pour conserver l'ancienne photo -->
+            <input type="hidden" name="current_photo" value="{{ voiture[7] }}">
+
+            <button type="submit">Modify</button>
+            
+        </form>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Dashboard.css') }}" />
+</head>
+
+<body>
+    <section class="dashboard-section">
+        <div class="sidebar">
+            <a href="#" class="logo">LUXCAR</a>
+            <nav class="nav-links">
+                <a href="{{ url_for('Dashboard_Admin') }}" class="nav-link">
+                    <i class="fas fa-users"></i> Managers
+                </a>
+                <a href="{{ url_for('Dashboard_Car') }}" class="nav-link">
+                    <i class="fas fa-car"></i> Cars
+                </a>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-cog"></i> Settings
+                </a>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-bell"></i> Notifications
+                </a>
+            </nav>
+            <!-- <a href="#" class="logout-button">Log Out</a> -->
+            <a href="{{ url_for('index') }}" class="logout-button">
+                <i class="fas fa-sign-out-alt"></i> Log Out
+            </a>
+            
+        </div>
+        <div class="dashboard-content">
+            <h2>Welcome to the Dashboard</h2>
+            <div class="cards">
+                <div class="card">
+                    <h3>Total Cars</h3>
+                    <p>{{ NumberCars[0] }}</p>
+                </div>
+                <div class="card">
+                    <h3>Total Managers</h3>
+                    <p>{{ Number_Of_Managers[0] }}</p>
+                </div>
+                <div class="card">
+                    <h3>Notifications</h3>
+                    <p>5 Unread</p>
+                </div>
+            </div>
+            <div class="add-manager-form">
+                <h3>Adding new manager :</h3>
+                <form action="{{ url_for('add_manager') }}" method="POST">                    
+                    <label for="prenom">First Name:</label>
+                    <input type="text" id="prenom" name="Fname" required>
+                    
+                    <label for="nom">Last Name:</label>
+                    <input type="text" id="nom" name="Lname" required>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                    
+                    <label for="motdepasse">Password:</label>
+                    <input type="password" id="motdepasse" name="motdepasse" required>
+                    
+                    <button type="submit">Add</button>
+                </form>
+                
+            </div>
+            
+            <!-- Add a table here -->
+            <div class="data-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Actions</th>
+                        
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for manager in managers %}
+                            <tr>
+                                <td>{{ loop.index }}</td> <!-- L'index commence à 1 par défaut -->
+                                <td>{{ manager[1] }}</td> <!-- Le nom -->
+                                <td>{{ manager[2] }}</td> <!-- Le prénom -->
+                                <td>{{ manager[3] }}</td> <!-- L'email -->
+                                <!-- Ajout d'actions -->
+                                <td class="action-btn">
+                                    <!-- Lien pour la modification   edit_manager  -->
+                                    <a href="{{ url_for('edit_manager', manager_id=manager[0]) }}" class="btn btn-edit">Edit</a>
+                                    <!-- Lien pour la suppression -->
+                                    <a href="{{ url_for('delete_manager', manager_id=manager[0]) }}" class="btn btn-delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce manager ?')">Delete</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table> 
+            </div>    
+            <div class="data-Cars">
+
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

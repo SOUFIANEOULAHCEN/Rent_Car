@@ -1,0 +1,443 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+:root {
+    --black: #141414;
+    --white: #f5f5f1;
+    --primary-color: #e50914;
+    --secondary-color: #b3b3b3;
+    --font-family: 'Poppins', sans-serif;
+}
+
+body {
+    font-family: var(--font-family);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    background-color: var(--black);
+    color: var(--white);
+}
+
+a {
+    text-decoration: none;
+    color: var(--white);
+}
+
+header {
+    position: fixed;
+    width: 100%;
+    padding: 0 -20%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: var(--black);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    height: 60px;
+}
+
+header .logo {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+nav a {
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: var(--primary-color);
+}
+
+.login-select {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+
+/* .section-home {
+    background: url('/path/to/your/background-image.jpg') no-repeat center center/cover;
+    padding: 100px 10% 40px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+    color: var(--white);
+} */
+
+.section-home {
+    position: relative; /* Ajouter une position relative pour que le pseudo-élément puisse être positionné par rapport à cette section */
+    padding: 100px 10% 40px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
+    color: var(--white);
+    overflow: hidden; /* Empêcher le contenu de déborder de la section */
+    background: 
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), /* Dégradé linéaire semi-transparent */
+        url('../img/carBackground.jpg') no-repeat center center/cover; /* Image de fond */
+}
+
+
+
+
+
+
+
+.home-text h2 {
+    font-size: 3rem;
+    margin: 10px 0;
+}
+
+.home-text p {
+    font-size: 1.2rem;
+    margin: 10px 0;
+}
+
+.home-request a {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+}
+
+.home-request a:hover {
+    background-color: #ff1c21;
+}
+
+.section-cars {
+    padding: 80px 10% 40px;
+    background-color: var(--black);
+    text-align: center;
+}
+
+.title-cars h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.title-cars p {
+    font-size: 1.1rem;
+    color: var(--secondary-color);
+    margin-bottom: 40px;
+}
+
+.cards-container {
+    /* display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 20px; */
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+} 
+
+.card {
+    background-color: #181818;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 400px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 16px;
+}
+
+.card h3 {
+    font-size: 1.5rem;
+    margin: 10px 0;
+}
+
+.card p {
+    font-size: 1rem;
+    margin: 5px 0 10px;
+}
+
+#reserve {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+#reserve:hover {
+    background-color: #ff1c21;
+}
+
+
+.about-section {
+    padding: 80px 10%;
+    background-color: #141414; /* Fond sombre */
+    text-align: center;
+    color: #fff; /* Texte blanc */
+  }
+  
+  .about-container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .about-text {
+    padding: 40px;
+    background-color: #1c1c1c; /* Fond légèrement plus clair */
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .about-text h2 {
+    font-size: 2.5rem;
+    color: var(--white); /* Rouge vif */
+    margin-bottom: 20px;
+  }
+  
+  .about-text p {
+    font-size: 1.1rem;
+    color: #b3b3b3; /* Texte gris clair */
+    line-height: 1.6;
+  }
+  
+  .about-icons {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .icon {
+    margin: 0 20px;
+  }
+  
+  .icon i {
+    font-size: 2rem;
+    color:var(--primary-color); /* Bleu */
+  }
+  
+  .icon p {
+    margin-top: 10px;
+    font-size: 1rem;
+    color: #777777; /* Texte gris plus foncé */
+  }
+
+
+.contact-section {
+    padding: 80px 10% 40px;
+    background-color: var(--black);
+    text-align: center;
+}
+
+.contact-text h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.contact-text p {
+    font-size: 1.1rem;
+    color: var(--secondary-color);
+    margin-bottom: 40px;
+}
+
+.contact-form {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.contact-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--secondary-color);
+    font-family: var(--font-family);
+    font-size: 1rem;
+    background-color: var(--black);
+    color: var(--white);
+}
+
+.contact-form textarea {
+    height: 150px;
+    resize: vertical;
+}
+
+.contact-form button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contact-form button:hover {
+    background-color: #ff1c21;
+}
+
+footer {
+    padding: 40px 10%;
+    background-color: #141414;
+    color: var(--white);
+    text-align: center;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 200px;
+}
+
+.footer-section h4 {
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+}
+
+.footer-section p,
+.footer-section ul {
+    margin: 0;
+    line-height: 1.5;
+    color: var(--secondary-color);
+}
+
+.footer-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section ul li a:hover {
+    color: var(--primary-color);
+}
+
+.social-icons a {
+    margin-right: 10px;
+    color: var(--white);
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: var(--primary-color);
+}
+
+.footer-bottom {
+    margin-top: 20px;
+}
+
+.footer-bottom p {
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+}
+
+
+
+.what-they-say-section {
+    padding: 80px 10%;
+    background-color: #141414;
+    text-align: center;
+    color: var(--white);
+}
+
+.what-they-say-container {
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+.what-they-say-text h2 {
+    font-size: 2.5rem;
+    color: var(--white);
+    margin-bottom: 20px;
+}
+
+.what-they-say-text p {
+    font-size: 1.1rem;
+    color: var(--secondary-color);
+    margin-bottom: 40px;
+}
+
+.customer-feedback {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.customer-card {
+    background-color: #181818;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 300px;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.customer-card img {
+    width: 250px;
+    height: 200px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.customer-card h3 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.customer-card p {
+    font-size: 1rem;
+    color: var(--secondary-color);
+    line-height: 1.6;
+}

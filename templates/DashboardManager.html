@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Manager</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+    <style>
+        /* Utilisation des couleurs et du style inspirés de Netflix */
+        :root {
+            --background-dark: #141414;
+            --background-light: #1f1f1f;
+            --accent-color: #e50914;
+            --text-light: #ffffff;
+            --text-dark: #b3b3b3;
+            --btn-hover: #f40612;
+        }
+        a{
+          text-decoration:none;
+        }
+        h2{
+          margin-left:20px;
+        }
+        body {
+            background-color: var(--background-dark);
+            color: var(--text-light);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+       
+        .dashboard-section {
+          display: flex;
+          height: 100%;
+          width: 100%;
+      }
+
+        .sidebar {
+          width: 250px;
+          background-color: #181818;
+          padding: 20px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+      }
+      
+      .sidebar .logo {
+          color: #e50914;
+          font-size: 24px;
+          font-weight: bold;
+          text-align: center;
+          margin-bottom: 20px;
+          text-decoration: none;
+      }
+      
+      .sidebar .nav-links {
+          flex-grow: 1;
+      }
+      
+      .sidebar .nav-link {
+          color: #fff;
+          padding: 10px 15px;
+          text-decoration: none;
+          display: flex;
+          align-items: center;
+          margin-bottom: 10px;
+          border-radius: 4px;
+          transition: background-color 0.3s;
+      }
+      
+      .sidebar .nav-link:hover {
+          background-color: #333;
+      }
+      
+      .sidebar .nav-link i {
+          margin-right: 10px;
+      }
+      
+      .sidebar .logout-button {
+          color: #fff;
+          padding: 10px 15px;
+          text-decoration: none;
+          display: flex;
+          align-items: center;
+          border-radius: 4px;
+          transition: background-color 0.3s;
+          margin-top: 20px;
+      }
+      
+      .sidebar .logout-button:hover {
+          background-color: #e50914;
+      }
+      
+      
+
+        .nav-links {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav-links .nav-link {
+            color: var(--text-light);
+            border-bottom: 1px solid #333;
+            padding: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .nav-link:hover {
+            background-color: var(--background-light);
+        }
+
+        .logout-button {
+            color: var(--text-light);
+            background-color: transparent;
+            border: none;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .logout-button:hover {
+            background-color: var(--background-light);
+        }
+
+        .dashboard-content {
+          flex: 1; /* Utilisation de flex pour occuper tout l'espace disponible */
+          padding: 40px 50px 20px 0; /* Ajustement des marges */
+          background-color: var(--background-light);
+          color: var(--text-light);
+          overflow-y: auto; /* Ajout d'un défilement vertical si le contenu dépasse */
+      }
+      
+      .cards {
+        margin-left:20px;
+          display: flex;
+          gap: 20px;
+          flex-wrap: wrap; /* Permet aux cartes de passer à la ligne si elles ne rentrent pas dans le conteneur */
+      }
+      
+      .card {
+          flex: 1;
+          min-width: 200px; /* Définition d'une largeur minimale pour les cartes */
+          padding: 20px;
+          background-color: var(--background-dark);
+          color: var(--text-light);
+          border: 1px solid #333;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+          text-align: center;
+      }
+      
+      .add-car-form {
+          margin-top: 20px;
+          background-color: var(--background-light);
+          color: var(--text-light);
+          padding: 20px;
+          border-radius: 8px;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      }
+      
+      .add-car-form label {
+          display: block;
+          margin-bottom: 5px;
+      }
+      input,select{
+        background-color:var(--background-dark);
+        color:#fff;
+      }
+      
+      .add-car-form input,
+      .add-car-form select {
+          width: calc(100% - 20px); /* Réduire la largeur pour compenser le padding */
+          padding: 8px;
+          margin-bottom: 15px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+      }
+      
+      .add-car-form button {
+          background-color: var(--accent-color);
+          color: var(--text-light);
+          padding: 10px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s;
+          width: 100%;
+      }
+      
+      .add-car-form button:hover {
+          background-color: var(--btn-hover);
+      }
+      
+      .data-table {
+          margin-top: 20px;
+          margin-left:20px;
+          background-color: var(--background-dark);
+          color: var(--text-light);
+          border-radius: 8px;
+          overflow: hidden;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+          max-width: 100%; /* Définir une largeur maximale pour le tableau */
+      }
+      
+      table {
+          width: 100%;
+          border-collapse: collapse;
+      }
+      
+      th,
+      td {
+          padding: 10px 15px;
+          border: 1px solid #333;
+          text-align: left;
+      }
+      
+      th {
+          background-color: var(--accent-color);
+          color: var(--text-light);
+          border: none;
+      }
+      
+      tr {
+          border-bottom: 1px solid #333;
+      }
+      
+      tr:hover {
+          background-color: var(--background-light);
+      }
+      
+      .btn-edit,
+      .btn-delete {
+          background-color: var(--accent-color);
+          color: var(--text-light);
+          padding: 5px 10px;
+          border-radius: 5px;
+          text-align: center;
+          margin-right: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s;
+      }
+      
+      .btn-edit:hover,
+      .btn-delete:hover {
+          background-color: var(--btn-hover);
+      }
+      
+    </style>
+</head>
+
+<body>
+    <section class="dashboard-section">
+        <div class="sidebar">
+            <a href="#" class="logo">LUXCAR</a>
+            <nav class="nav-links">
+                <a href="{{ url_for('Dashboard_Manager') }}" class="nav-link">
+                    <i class="fas fa-car"></i> Cars
+                </a>
+                <a href="{{ url_for('reservations_dashboard') }}" class="nav-link">
+                    <i class="fas fa-car"></i> Reservations
+                </a>
+                <a href="#" class="nav-link"> <i class="fas fa-cog"></i> Settings </a>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-bell"></i> Notifications
+                </a>
+            </nav>
+            <a href="{{ url_for('index') }}" class="logout-button">
+                <i class="fas fa-sign-out-alt"></i> Log Out
+            </a>
+        </div>
+        <div class="dashboard-content">
+            <h2>Dashboard Manager</h2>
+            <div class="cards">
+                <div class="card">
+                    <h3>Total Cars</h3>
+                    <p>{{ Nombre_voiture[0] }}</p>
+                </div>
+                <div class="card">
+                    <h3>Available Cars</h3>
+                    <p>{{ Nombre_available[0] }}</p>
+                </div>
+                <div class="card">
+                    <h3>totale client</h3>
+                    <p>55</p>
+                </div>
+            </div>
+            <div class="add-car-form">
+                <h3>Ajouter une nouvelle voiture</h3>
+                <form action="/add-car" method="POST" enctype="multipart/form-data">
+                    <label for="marque">Marque:</label>
+                    <input type="text" id="marque" name="marque" required />
+
+                    <label for="modele">Modèle:</label>
+                    <input type="text" id="modele" name="modele" required />
+
+                    <label for="immatriculation">Registration:</label>
+                    <input
+                        type="text"
+                        id="immatriculation"
+                        name="immatriculation"
+                        required
+                    />
+
+                    <label for="categorie">Catégorie:</label>
+                    <input type="text" id="categorie" name="categorie" required />
+
+                    <label for="prix">Prix:</label>
+                    <input type="text" id="prix" name="prix" required />
+
+                    <label for="disponibilite">Disponibilité:</label>
+                    <select id="disponibilite" name="disponibilite" required>
+                        <option value="1">Disponible</option>
+                        <option value="0">Non disponible</option>
+                    </select>
+
+                    <label for="photo">Picture:</label>
+                    <input type="file" id="photo" name="photo" required />
+
+                    <button type="submit">Add</button>
+                </form>
+            </div>
+            <div class="data-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Model</th>
+                            <th>Marque</th>
+                            <th>Registration</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                            <th>Image</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for voiture in voitures %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ voiture[2] }}</td>
+                            <td>{{ voiture[1] }}</td>
+                            <td>{{ voiture[3] }}</td>
+                            <td>{{ voiture[5] }}</td>
+                            {% if voiture[6] =='1' %}
+                            <td>Available</td>
+                            {% else %}
+                            <td>invailable</td>
+                            {% endif %}
+
+                            <td>
+                                <img
+                                    src="{{ url_for('static', filename=voiture[7]) }}"
+                                    width="50"
+                                    height="50"
+                                />
+                            </td>
+                            <td>
+                                <a
+                                    href="{{ url_for('edit_car_form', car_id=voiture[0]) }}"
+                                    class="btn btn-edit"
+                                >Modify</a
+                                >
+                                <form
+                                    action="{{ url_for('delete_car', car_id=voiture[0]) }}"
+                                    method="POST"
+                                    style="display: inline"
+                                >
+                                    <button
+                                        type="submit"
+                                        class="btn btn-delete"
+                                        onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette voiture ?')"
+                                    >
+                                        Delete
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
